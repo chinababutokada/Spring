@@ -5,13 +5,21 @@
 
 <bean name="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
 <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+<!-- <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/> -->
 <property name="username" value="nani"/>
 <property name="password" value="nani"/>
+
+<!-- <property name="connectionProperties">
+<props>
+<prop key="user">nani</prop>
+<prop key="password">nani</prop>
+</props>
+</property> -->
+
 </bean>
 
 <bean name="dao" class="com.nt.dao.StudentDao">
-<constructor-arg name="ds" ref="datasource"/>
+<constructor-arg name="ds" ref="hkcp"/>
 </bean>
 
 <bean name="service" class="com.nt.service.StudentService">
@@ -21,4 +29,13 @@
 <constructor-arg name="service" ref="service"/>
 </bean>
 
+
+<bean id ="hkcp" class="com.zaxxer.hikari.HikariDataSource" parent="datasource">
+<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+<property name="maximumPoolSize" value="30"/>
+<property name="minimumIdle" value="10"/>
+<property name="connectionTimeout" value="2000"></property>
+
+
+</bean>
 </beans>

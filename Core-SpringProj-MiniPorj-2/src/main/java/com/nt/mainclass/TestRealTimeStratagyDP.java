@@ -16,7 +16,7 @@ public class TestRealTimeStratagyDP {
 		StudentVO vo = new StudentVO();
 		vo.setSName("Nani");
 		vo.setCource("Angular");
-		vo.setFee("1000");
+		vo.setFee("20000");
 		System.out.println();
 		factory = new DefaultListableBeanFactory();
 		reader = new XmlBeanDefinitionReader(factory);
@@ -26,9 +26,6 @@ public class TestRealTimeStratagyDP {
 		StudentController controller = factory.getBean("controller",StudentController.class);
 		
 		System.out.println(controller.RegisterStudentDetails(vo));
-		
-		
-		
 
 	}
 
