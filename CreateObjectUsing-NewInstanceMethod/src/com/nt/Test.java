@@ -14,19 +14,14 @@ public class Test {
 		 */
 	    Class c1 = Class.forName(args[0]);
 	    Constructor[] con = c1.getDeclaredConstructors();
+	    con[0].setAccessible(true);
 		 
            Demo d1  = (Demo)con[0].newInstance(10,20);
            System.out.println("d1:"+d1);
 	}
 
-}
-class Demo{
-	int a, b;
-	Demo(int a,int b){
-		this.a = a;
-		this.b = b;
-		System.out.println(a+"............"+b);
-	}
+
+
 	
 	
 	
