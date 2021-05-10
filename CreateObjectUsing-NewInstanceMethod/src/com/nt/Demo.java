@@ -11,7 +11,6 @@ class Demo{
 	}
 	 Demo(int a){
 		this.a = a;
-		this.b = b;
 		System.out.println(a+"............"+b);
 	}
 }
