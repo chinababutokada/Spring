@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+<bean id = "ekart" class="com.nt.courier.EKart" scope="prototype"/>
+<bean id = "dtdc" class="com.nt.courier.DTDC" scope="singleton" />
+<bean id = "blue" class="com.nt.courier.BlueDart" scope="singleton" lazy-init="true"/>
+
+
+<bean id ="flipkart" class="com.nt.comp.Flipkart">
+<!-- <constructor-arg name="courier" ref="dtdc" ></constructor-arg> -->
+<property name="courier" ref="ekart"></property>
+</bean>
+<!-- <bean id ="flipkart1" class="com.nt.comp.Flipkart" /> -->
+
+<!-- <bean id ="flipkart" class="com.nt.comp.Flipkart""/> -->
+
+
+
+
+</beans>

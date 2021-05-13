@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+<bean id = "dtdc" class="com.nt.courier.DTDC"/>
+<bean id = "blue" class="com.nt.courier.BlueDart"/>
+<bean id = "ekart" class="com.nt.courier.EKart" />
+
+<!-- <bean id = "fpkt" class="com.nt.comp.Flipkart" scope="singleton"> -->
+<bean id = "fpkt" class="com.nt.comp.Flipkart" scope="prototype">
+<constructor-arg name="courier" ref="dtdc"></constructor-arg>
+</bean>
+<bean id="dp" class="com.nt.dp.Printer" scope="prototype" factory-method="getInstance"/>
+</beans>
