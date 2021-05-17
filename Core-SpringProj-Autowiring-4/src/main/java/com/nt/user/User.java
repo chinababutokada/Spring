@@ -19,6 +19,7 @@ public class User {
 		Flipkart flipkart = factory.getBean("flipkart",Flipkart.class);
 		String result = flipkart.buyProducts(new String[]{"soaps","charger"});
 		System.out.println("result : "+result);
+		factory.destroySingletons();
 	}
 
 }

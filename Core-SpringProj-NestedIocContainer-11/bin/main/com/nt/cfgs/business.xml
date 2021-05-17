@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+<bean id = "hkcp" class= "com.zaxxer.hikari.HikariDataSource">
+<property name="driverClassName" value="${jdbc.driver}" />
+<property name="jdbcUrl" value="${jdbc.url}"/>
+<property name="username" value="${jdbc.uname}"/>
+<property name="password" value="${jdbc.pwd}"/>
+<property name="maximumPoolSize" value="${jdbc.mpSize}"/>
+<property name="minimumIdle" value="${jdbc.mIdle}"/>
+<property name="connectionTimeout" value="${jdbc.timeOut}"/>
+</bean>
+
+<bean id ="dao" class="com.nt.dao.EmployeeDao" scope="singleton" autowire="constructor" />
+
+<!-- <bean id="service" class="com.nt.service.EmployeeService" autowire="constructor" ></bean> -->
+
+<bean id="service" class="com.nt.service.EmployeeService">
+   <constructor-arg name="empDao">
+   <ref bean="dao"/>
+<!-- <ref parent="dao"/> -->
+   </constructor-arg>
+</bean>
+
+<context:property-placeholder location="com/nt/commons/jdbc.properties"/>
+</beans>
