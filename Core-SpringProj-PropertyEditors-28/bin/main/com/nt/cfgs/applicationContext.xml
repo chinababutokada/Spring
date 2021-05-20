@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/cache https://www.springframework.org/schema/cache/spring-cache-4.3.xsd">
+
+<!-- <bean id="details" class="com.nt.bank.LoanAmtDetails">
+
+<property name="pAmt" value="100000"/>
+<property name="rate" value="2"/>
+<property name="time" value="10"/>
+</bean> -->
+<bean id="calc" class="com.nt.bank.LoanIntrestAmtCalc">
+<constructor-arg name="details" value="100000,2,10"></constructor-arg>
+</bean>
+<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+<property name="customEditors">
+<map>
+<entry key="com.nt.bank.LoanAmtDetails" value="com.nt.customeditors.LoanDetailsCustomEditor" />
+</map>
+
+</property>
+</bean>
+</beans>
