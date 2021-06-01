@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<bean id="intrestCalc" class="com.nt.beans.IntrestCalculatorImpl"/>
+<bean id="asp" class="com.nt.beans.SimpleCalcAspect"/>
+<bean id= "logAsp" class="com.nt.beans.LoggingAspect"/>
+<bean id="casheAsp" class="com.nt.beans.CashingAspect"/>
+
+<aop:config proxy-target-class="true" >
+
+<aop:pointcut expression="execution(* com.nt.beans.IIntrestCalc.*(..))" id="logptc"/>
+<aop:pointcut expression="execution(float com.nt.beans.IIntrestCalc.calcSimpleIntrest(..))" id="ptc"/>
+<aop:pointcut expression="execution(* com.nt.beans.IIntrestCalc.*(..))" id="cachePtc"/>
+
+<aop:aspect ref="logAsp" order="3">
+<aop:around method="logging" pointcut-ref="logptc"/>
+</aop:aspect>
+
+<aop:aspect ref="casheAsp" order="2"> 
+<aop:around method="cashing" pointcut-ref="cachePtc"/>
+</aop:aspect>
+
+<aop:aspect ref="asp" order="1">
+<aop:around method="performanceMonitoring" pointcut-ref="ptc"/>
+</aop:aspect>
+
+</aop:config>
+
+
+</beans>
