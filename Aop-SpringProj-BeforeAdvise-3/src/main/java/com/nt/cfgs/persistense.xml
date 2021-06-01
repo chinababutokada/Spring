@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<bean id="hkcp" class="com.zaxxer.hikari.HikariDataSource">
+<property name="driverClassName" value="${jdbc.driver}"/>
+<property name="jdbcUrl" value="${jdbc.url}"/>
+<property name="username" value="${jdbc.username}"/>
+<property name="password" value="${jdbc.password}"/>
+<property name="connectionTimeout" value="${jdbc.connectionTimeout}"/>
+</bean>
+
+
+<bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+<constructor-arg name="dataSource" ref="hkcp"></constructor-arg>
+</bean>
+
+<bean id="bankSerDao" class="com.nt.dao.BankServicesDaoImpl">
+<constructor-arg name="jt" ref="jt"></constructor-arg>
+</bean>
+
+<bean id="authdao" class="com.nt.dao.AuthenticationManagerDaoImpl">
+<constructor-arg name="jt" ref="jt"></constructor-arg>
+</bean>
+
+<bean id="ppc" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+<property name="location" value="com/nt/commons/jdbc.properties"></property>
+</bean>
+
+</beans>
